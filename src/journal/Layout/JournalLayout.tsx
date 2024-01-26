@@ -1,7 +1,7 @@
 import { Box, Toolbar } from '@mui/material'
 import { type PropsWithChildren } from 'react'
-import Navbar from '../Components/Navbar'
-import Sidebar from '../Components/Sidebar'
+import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
 
 const drawerWidth = 240
 

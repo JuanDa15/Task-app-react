@@ -1,5 +1,7 @@
-import { TurnedInNot } from '@mui/icons-material'
-import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Box, Divider, Drawer, List, Toolbar, Typography } from '@mui/material'
+import { useSelector } from 'react-redux'
+import { type JournalStore, type AppStore, type AuthStore } from '../../store/appStore'
+import SidebarItem from './SidebarItem'
 
 interface Props {
   drawerWidth: number
@@ -8,6 +10,8 @@ interface Props {
 export default function Sidebar ({
   drawerWidth
 }: Props): JSX.Element {
+  const { displayName } = useSelector<AppStore, AuthStore>(state => state.auth)
+  const { notes } = useSelector<AppStore, JournalStore>(state => state.journal)
   return (
     <Box
       component='aside'
@@ -29,25 +33,15 @@ export default function Sidebar ({
         }}
       >
         <Toolbar>
-          <Typography variant='h6' noWrap >
-            Juan David Osorio
+          <Typography variant='h6' noWrap display={((displayName?.length ?? 0) > 0) ? '' : 'none'}>
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />
         <List>
           {
-            Array(10).fill(0).map((_, index) =>
-              <ListItem key={index} disablePadding >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <TurnedInNot />
-                  </ListItemIcon>
-                  <Grid container>
-                    <ListItemText primary={`Item ${index + 1}`} />
-                    <ListItemText secondary={'lorem12 3234334'} />
-                  </Grid>
-                </ListItemButton>
-              </ListItem>
+            notes.map((note) =>
+              <SidebarItem key={note.id} note={note}/>
             )
           }
         </List>

@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material'
-import { grey } from '@mui/material/colors'
+import { grey, purple } from '@mui/material/colors'
 
 const primary = '#AB47BC'
 const secondary = '#BA68C8'
@@ -19,13 +19,24 @@ export const purpleTheme = createTheme({
       paper: '#263238',
       default: '#37474F'
     },
+    action: {
+      active: grey[50]
+    },
     text: {
-      primary: '#fff',
-      secondary: '#CFD8DC',
+      primary: purple[50],
+      secondary: purple[100],
       disabled: grey[500]
     },
     error: {
       main: '#C62828'
+    }
+  },
+  components: {
+    MuiIcon: {
+      styleOverrides: {
+        root: {
+        }
+      }
     }
   }
 })
